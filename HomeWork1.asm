@@ -22,7 +22,7 @@ main:
 
       
 
-       li $v0, 8                   #call code to read string
+       li $v0, 8                 #call code to read string
 
        la $t0, user_input        #load address of user_input in register $t0
 
@@ -30,11 +30,11 @@ main:
 
        la $a1, 9                 #gets length of space in myWord to avoid exceeding memory limit
 
-       syscall                      #syscall to read user_input and store the string in memory
+       syscall                   #syscall to read user_input and store the string in memory
 
       
 
-       addi $t7, $t0, 8            #add the value of the 9th byte of user_input to the register $t7
+       addi $t7, $t0, 8          #add the value of the 9th byte of user_input to the register $t7
 
        addi $s5, $t0, 0
 
@@ -54,13 +54,13 @@ checklength:
 
 subtractfour:
 
-       addi $s3, $s3, -4			#Remove extra 4
+       addi $s3, $s3, -4			#Remove extra 4 from
 
 iterate_string:                     #iterate through input to check if all the charectars are valid    
 
       
 
-       lb $t1, 0($t0)                #first byte of memory into register $t1
+       lb $t1, 0($t0)               #first byte of memory into register $t1
 
        beq $t1, 0, less_than_ten
 
@@ -96,11 +96,11 @@ invalid:                      #label to call invalid and exit program
 
        syscall
 
-       li $v0, 10                 #exit
+       li $v0, 10                  #exit
 
        syscall
 
-valid:                          #label to call valid and exit program
+valid:                             #label to call valid and exit program
 
        addi $t0, $t0, 1            #increment offset of $t0 by 1
 
@@ -122,13 +122,13 @@ less_than_ten:
 
        addi $t0, $t0, -1
 
-       lb $t1, 0($t0)					#Checking if the first value is less that 8 because if it's greater then the output will be faulty
+       lb $t1, 0($t0)				#Checking if the first value is less that 8 because if it's greater then the output will be faulty
 
        blt $t1, 58, exit_loop
 
        divu $s2, $s0
 
-       mflo $a0
+       mflo $a0						#Flows the low to $a0,  prints it then exit_loop run
 
        li $v0, 1
 
@@ -146,6 +146,6 @@ exit_loop:
 
        syscall
 
-       li $v0, 10                 #call code to exit program
+       li $v0, 10                 	#code to exit program
 
        syscall
